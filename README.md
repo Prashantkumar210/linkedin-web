@@ -15,7 +15,7 @@ A full-stack job portal built with MongoDB, Express.js, React, and Node.js.
 
 ## Installation
 
-### Backend
+### Backend and Frontend
 ```bash
 cd backend
 npm install
