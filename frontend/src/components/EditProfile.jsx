@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef} from "react";
 import { RxCross2 } from "react-icons/rx";
 import { userDataContext } from "../context/UserContext";
 import dp from "../assets/dp.webp";
@@ -94,8 +94,9 @@ const coverImage = useRef(null);
   return (
     <div className="w-full h-[100vh] fixed top-0 z-[100] flex justify-center items-center">
 
-    <input type="file" accept="/image/*" hidden ref={profileImage}/>
-    <input type="file" accept="/image/*" hidden ref={coverImage}/>
+    <input type="file" accept="image/*" hidden ref={profileImage}/>
+    <input type="file" accept="image/*" hidden ref={coverImage}/>
+
 
       <div className="w-full h-full  bg-black opacity-[0.5] absolute"></div>
       <div className="w-[90%] max-w-[500px] h-[600px] bg-white relative z-[200] shadow-lg rounded-lg p-[8px] overflow-auto">
