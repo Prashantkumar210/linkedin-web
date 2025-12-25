@@ -10,8 +10,7 @@ function Signup() {
 
   let [show, setShow] = useState(false)
 
-  // when we want to access the context api then we use Usecontext hook
-
+  // when we want to access the context api(here Backend localhost:8000) then we use Usecontext hook
   let {serverUrl} = useContext(authDataContext)
   
   let {userData, setUserData} = useContext(userDataContext)
@@ -55,6 +54,7 @@ function Signup() {
       setPassword("")
 
     } catch (error) {
+      console.log(error)
       setErr(error.response.data.message)
       setLoading(false)
     }

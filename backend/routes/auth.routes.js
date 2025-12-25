@@ -1,6 +1,7 @@
 import express from "express";
 import { login, logOut, signUp } from "../controllers/auth.controllers.js";
 
+// Make an instance by which we can routing 
 let authRouter = express.Router();
 
 authRouter.post("/signup", signUp);

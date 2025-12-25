@@ -8,7 +8,7 @@ export const signUp = async (req, res) => {
 
     if (!firstName || !lastName || !userName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
-    }
+    } 
 
     let existEmail = await User.findOne({ email });
     if (existEmail) {
@@ -23,17 +23,20 @@ export const signUp = async (req, res) => {
     if (password.length < 8) {
       return res.status(400).json({ message: "Password must be at least 8 characters" });
     }
-
+    
+    // Convert the password into Hashpassword
     let hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create the User 
     const user = await User.create({
-      firstName,
+      firstName, // When we have the Key value same we don't need write it like this firstName:firstName
       lastName,
       userName,
       email,
       password: hashedPassword,
     });
 
+    // Get the Token from Config.token.js and store in the token variable
     let token = await genToken(user._id);
 
     res.cookie("token", token, {
@@ -43,7 +46,9 @@ export const signUp = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
     });
 
+    // 201 means something is creating 
     return res.status(201).json(user)
+
   } catch (error) {
     console.error("❌ Signup error:", error); // log full error
     return res.status(500).json({ message: "signup error" }); // return actual error message
@@ -58,7 +63,7 @@ export const login = async(req, res)=>{
         return res.status(400).json({ message: "Email does not exists!" });
       }
 
-      const isMatch = bcrypt.compare(password,user.password);
+      const isMatch = await bcrypt.compare(password,user.password);
       if(!isMatch){
         return res.status(400).json({message:"incorrect Password"});
       }
@@ -72,7 +77,7 @@ export const login = async(req, res)=>{
         secure: process.env.NODE_ENV === "production",
       });
 
-      return res.status(201).json(user)
+      return res.status(200).json(user)
     } catch (error) {
         console.error("❌ Signin error:", error); 
       return res.status(500).json({ message: "signin error" });

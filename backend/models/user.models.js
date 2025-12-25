@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema(
     ],
     connections: [
       {
+        // When we want to become a particular schema into type then we write this  
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
@@ -37,5 +38,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// User model 
 const User = mongoose.model("User", userSchema);
 export default User;
